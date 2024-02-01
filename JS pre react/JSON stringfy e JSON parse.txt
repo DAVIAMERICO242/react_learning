@@ -1,0 +1,12 @@
+*****strinfy
+
+z = {x: 1, y: 2}
+JSON.stringify(z) //PASSA UM OBJETO PARA JSON NAO JSON PARA STRING
+'{"x":1,"y":2}'
+
+
+****parse
+z = '{"x":1,"y":2}'
+JSON.parse(z) //PASSA JSON para objeto
+
+{x:1, y:2}

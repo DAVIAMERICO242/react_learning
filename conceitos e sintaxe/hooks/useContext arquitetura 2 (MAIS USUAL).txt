@@ -1,0 +1,72 @@
+****A PARTIÇÃO DOS VARIOS CONTEXTOS É INTUITIVA E FILOSOFICA
+
+//Se é criado um provedor de estados em um .js, nessa pasta temos a declaração do contexto (createContext()), do provedor e a declaração dos estados a serem gerenciados.
+//Na criação do provedor desestruturamos um objeto abstrato e pegamos o metodo nativo do reactr children, dentro da tag do provedor associamos value = ... onde temos os estados a serem gerenciados
+//Esse provedor é importado no aplicativo principal e seus filhos poderão compartilhar o estado declarado por createContext no .js do provedor
+//Cada componente filho aceita o estado declarado para o manipular (não assumir diretamente) usando useContext(contexto)
+
+#############################CÓDIGO COM O CONTEXTO E PROVEDOR
+
+import {createContext, useState} from 'react';
+
+const ContextCounter = createContext()//CRIANDO O CONTEXTO PARA GERENCIAR MEU ESTADO
+const ContextProvider = ({children}) =>{ //DESESTRUTURANDO O OBJETO ABSTRATO PARA PEGA OS FILHOS
+    const [state,setState] = useState('ESTADO X')  //O ESTADO A SER COMPARTILHADO/GERENCIADO
+    return (
+        <ContextCounter.Provider value = {{state,setState}}>{children}</ContextCounter.Provider>//AQUI CRIAMOS O PROVEDOR, devemos usar a notação de objeto ({}) em value, além da notação js
+    )
+}
+export {ContextCounter};//sintaxe de exportação especifica
+export {ContextProvider};
+
+############################Declarando o provedor e seus filhos no componente principal:
+
+import React, {useState ,useEffect, useRef, useContext} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App1 from './components/Componente1'
+import App2 from './components/Componente2'
+import {ContextProvider} from './components/ContextCounter.js'
+const MainComponent = () => {
+
+  return(
+    <React.StrictMode>
+      <ContextProvider>
+        <App1/>
+        <App2/>
+      </ContextProvider>
+    </React.StrictMode>
+  );
+};
+
+
+###########################Aceitando o compartilhamento do estado em cada componente filho:
+
+
+---App1
+
+import React, { useState, useEffect, useRef, useContext} from 'react';
+import {ContextCounter} from "./ContextCounter.js"
+
+function App() {
+    const {state} = useContext(ContextCounter)
+
+    return(
+        <div> O estado atual do componente 1 é {state}</div>
+    )
+}
+export default App;
+
+
+---App2
+
+import {ContextCounter} from "./ContextCounter.js"
+import {useContext} from 'react'
+const App2 = () =>{
+    const {state} = useContext(ContextCounter)
+    return (
+        <div>O estado atual do componente 2 é {state}</div>
+    )
+}
+
+export default App2

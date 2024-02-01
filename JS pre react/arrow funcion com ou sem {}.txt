@@ -1,0 +1,11 @@
+*****Arrow function que retorna 0
+
+const a = () => 0 
+
+*****Arrow function que retorna undefined:
+
+const a = () => {0}
+
+se eu quiser corrigir posso fazer
+
+const a = () => {return 0}

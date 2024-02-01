@@ -1,0 +1,2 @@
+uma promise é usada quando queremos tratar o retorno de uma função assincrona, o .then trata a saida da função assincrona quando tudo é bem sucedido e o .catch quando da problema,
+o .finally executa uma função quando a função assincrona acaba de rodar

@@ -1,0 +1,33 @@
+===>tudo em html dentro de return sera printado no componente
+
+cada componente tem o seguinte formato:
+
+import './any_component.css';//importar seu css
+
+function any_component(props){
+    return(
+        <div className = {props.name}>
+
+        </div>
+    )
+
+}
+
+
+e a chamada no react principal:
+
+import './App.css'
+import any_component from './components/primeiro componente.js'
+
+function App() {
+  return (
+    <div className="App">
+          <any_component name = "Matheus"/>
+    </div>
+  );
+}
+
+export default App;
+
+
+***O começo dos componentes devem estar em maiusculo pra funcionar

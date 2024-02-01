@@ -1,0 +1,122 @@
+NÃO OCORRE A RE-RENDERIZAÇÃO DO COMPONENTE QUANDO O VALOR DO USEREF MUDA ( o valor é o .current)
+, TUDO QUE É TEXTO EM JS PARA MOSTRAR EM HTML NÃO É ATUALIZADO PELO USEREF, POIS ISSO É CONSEQUENCIA DE UMA RENDERIZAÇÃO NO COMPONENTE
+
+************Não re-renderização do componente:
+
+**UseRef:
+
+Alteração de current do UseRef não renderiza o componente de novo, no console vemos apenas um print de console.log() mesmo o valor mudando:
+
+
+import React, {useState ,useEffect, useRef} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+
+const MainComponent = () => {
+  console.log('renderizado')
+  const refer = useRef('value1')
+  const change_value = () =>{
+    refer.current==="value1"?refer.current="value2":refer.current="value1"
+  }
+  return(
+    <React.StrictMode>
+      <button onClick = {change_value}> Button</button>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);
+
+
+
+
+**UseState:
+
+A alteração do estado do useState renderiza o componente, pois o console.log é executado a cada vez que o valor do hook muda:
+
+import React, {useState ,useEffect, useRef} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+
+const MainComponent = () => {
+  console.log('renderizado')
+  const [refer, setState] = useState('value1')
+  const change_value = () =>{
+    refer==="value1"?setState("value2"):setState("value1")
+  }
+  return(
+    <React.StrictMode>
+      <div>Cor</div>
+      <button onClick = {change_value}> Button</button>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);
+
+**************Lógica do valor anterior:
+
+
+import React, { useState, useEffect, useRef } from 'react';
+
+function App() {
+  const [count, setCount] = useState(0);
+  const prevCountRef = useRef();
+
+  useEffect(() => {
+    // Update the ref with the current value of count after each render
+    prevCountRef.current = count;
+  }, [count]);
+
+  const handleIncrement = () => {
+    prevCountRef.current = count; // Update the previous count ref first
+    setCount(count + 1); // Then update the count state
+  };
+
+  return (
+    <div>
+      <p>Current Count: {count}</p>
+      <p>Previous Count: {prevCountRef.current}</p>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  );
+}
+
+export default App;
+
+
+//Na primeira renderização prevCounRef vai abrigar o valor de 0, quando o botão é clicado o componente é re-renderizado e a div ATUALIZADA e ENTÃO, o useEffect é executado, como o count mudou
+o valor de prevCountRef.current vai mudar e ficar igual ao atual, mas isso não trigera uma re-renderização e o valor printado se resume a re-renderização disparada pela mudança no useState.
+
+
+*************Mais basico:
+Em
+
+const refer = useRef(null)
+
+eu crio um referenciador em react para manipular o DOM de algum elemento que está referenciando refer pelo atributo html ref
+
+import React, {useState ,useEffect, useRef} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+
+const MainComponent = () => {
+  const refer = useRef(null)//propriedade inicial de current
+  const change_color = () =>{
+    refer.current.style.color==="red"?refer.current.style.color="green":refer.current.style.color="red"//manipulando o DOM pelo referenciador
+  }
+  return(
+    <React.StrictMode>
+      <div ref={refer}>Cor</div>
+      <button onClick = {change_color}> Button</button>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);

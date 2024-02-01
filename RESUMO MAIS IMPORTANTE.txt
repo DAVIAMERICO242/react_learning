@@ -1,0 +1,11 @@
+####Tomar cuidado com {} nas arrow functions
+####Posso usar html com js sem usar {}, eu so uso {} se for declarar o js dentro do elemento html (atributos ou texto)
+####Devemos criar um renderizador react e passar um elemento html para ele, apos isso devemos escolher o componente principal (ou outro) para renderizar nele
+####Os nomes dos componentes devem começar em maiusculo
+####Tudo em html dentro do return será renderizado, NÃO HÁ RENDERIZAÇÃO SEM RETURN
+####O componente em html é referenciado pelo seu nome funcional
+####Todo hook deve estar dentro do escopo funcional do componente
+####Em props um objeto abstrado é criado contendo os atributos do componente em html
+####O Css é global
+####{} e [] nao é falsy
+

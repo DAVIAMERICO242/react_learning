@@ -1,0 +1,14 @@
+const {met1, met2} = user//será salvo os metodos met1 e met2 dentro das variaveis met1 e met2
+
+
+const f = ({atri}){ //pegara o "atri" DO objeto recebido e usara como variavel do mesmo nome 
+  console.log('atri')
+
+
+
+}
+
+*************
+const {address, idade:age} = user //user tem o metodo idade e address
+
+//aqui vamos associar o metodo address a variavel adress e o metodo idade sera associado a variavel age

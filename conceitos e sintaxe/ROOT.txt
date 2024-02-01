@@ -1,0 +1,2 @@
+const root = ReactDOM.createRoot(document.getElementById('root')); //cita um elemento html onde o react vai ser renderizado
+root.render(<MainComponent />); //renderiza o componente no html referenciado

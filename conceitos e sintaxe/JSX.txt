@@ -1,0 +1,22 @@
+posso declarar um codigo jsx em cima de uma div, mas se quiser declarar dentro ou como atributo tenho que usar {}
+
+-não posso renderizar um objeto diretamente
+
+-só posso ter duas tags seguidas dentro do return se elas tem o mesmo pai, ex:
+
+function MyComponent() {//incorrento
+  return (
+    <h1>Hello</h1>
+    <p>World</p>
+  );
+}
+
+
+function MyComponent() {//correto
+  return (
+    <>
+      <h1>Hello</h1>
+      <p>World</p>
+    </>
+  );
+}

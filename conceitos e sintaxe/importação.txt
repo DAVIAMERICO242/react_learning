@@ -1,0 +1,27 @@
+***export default:
+
+function any_component(props){
+    return(
+        <div className = {props.name}>
+
+        </div>
+    )
+
+}
+export default any_component
+
+import './App.css'
+import any_name from './components/primeiro componente.js'
+
+function App() {
+  return (
+    <div className="App">
+          <any_name name = "Matheus"/>
+    </div>
+  );
+}
+
+export default App;
+
+No codigo acima o componente any_component será entendido como any_name já que sua exportação
+é default, se não tivessemos default teria que usar import {any_component} e export {any_component} em vez disso. 

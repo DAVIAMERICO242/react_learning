@@ -1,0 +1,27 @@
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
+
+const Fetcher = () => {
+  const [current_data,setData] = useState([]);
+  const [is_loading, setLoading] = useState(true)
+  useEffect(()=>{
+    setLoading(true)//cada vez que o endpoint mudar eu tenho que voltar a carregar
+     axios(`https://jsonplaceholder.typicode.com/posts`)
+    .then((response) =>{ //essa arrow function nao pode ter {}, pois ela deve retornar o json
+      setData(response.data)//retorna os dados provavelmente em json
+      setLoading(false)
+    }
+    )
+    .catch((error)=> {
+      console.log(`Following error fetching data: ${error}`)
+      }
+    )
+  }
+  ,[])//o array para garantir que a requisição so é feita quando o usuario muda o endpoint
+  return (
+      is_loading ? (
+        <p>Loading data...</p>
+      ) :(current_data.map((e)=><li className = 'required list'> {e.title} </li>)))
+};
+
+export default Fetcher;

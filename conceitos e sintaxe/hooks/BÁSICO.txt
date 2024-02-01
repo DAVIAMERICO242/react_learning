@@ -1,0 +1,49 @@
+Um hook precisa ser declarado dentro de um escopo funcional de um componente, nem que isso requisite mudar a estrutura base de um projeto react:
+
+
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+import Componente2 from './components/Componente2.js'
+
+const MainComponent = () => {
+  const [current_name, modifier] = useState('davi')
+  const modifier_parent = ()=>{
+      current_name === 'davi'?modifier('debora'):modifier('davi')
+  };
+
+  return(
+    <React.StrictMode>
+      <Componente2 name = {current_name} idade = {23}/>
+      <button onClick = {modifier_parent}> Change name </button>
+    </React.StrictMode>
+  );
+
+  };
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent />);
+
+
+
+--Note que quando queremos usar alguma coisa do hook em um elemento que já é html temos que fazer um componente auxiliar, no caso vira boa pratica
+  funcionalizar o codigo react principal em componente, e usar o const root e root.render só no final, ao invés de:
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+
+

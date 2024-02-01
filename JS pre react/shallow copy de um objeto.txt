@@ -1,0 +1,3 @@
+const copy = {...object}
+
+cria uma copia de um objeto onde apenas a modificação na primeira camada não afeta o objeto original, mas em camadas mais profundas sim

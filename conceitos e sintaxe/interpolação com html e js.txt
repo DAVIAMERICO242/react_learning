@@ -1,0 +1,1 @@
+dentro do html dentro jsx temos que declarar o codigo js em {}

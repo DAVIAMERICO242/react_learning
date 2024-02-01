@@ -1,0 +1,30 @@
+import React, {useEffect,useState} from 'react';
+
+const Fetcher = ({endpoint}) => {
+  const [current_data,setData] = useState([]);
+  const [is_loading, setLoading] = useState(true)
+  useEffect(()=>{//o array para garantir que a requisição so é feita quando o usuario muda o endpoint
+    setLoading(true)//cada vez que o endpoint mudar eu tenho que voltar a carregar
+     fetch(`https://jsonplaceholder.typicode.com/${endpoint}`)
+    .then((response) => //essa arrow function nao pode ter {}, pois ela deve retornar o json
+      response.json() 
+    )
+    .then((data) => {
+      setData(data);
+      setLoading(false)
+      }
+     )
+    .catch((error)=> {
+      console.log(`Following error fetching data: ${error}`)
+      }
+    )
+  }
+  ,[endpoint])//o array para garantir que a requisição so é feita quando o usuario muda o endpoint
+  return (
+      is_loading ? (
+        <p>Loading data...</p>
+      ) :(current_data.length?(current_data.map((e)=><li className = 'required list'> {e.title} </li>)):(<div>Data not found</div>)))
+};
+
+export default Fetcher;
+

@@ -1,0 +1,13 @@
+Objeto:
+
+{ name: 'John', age: 30 }
+
+Json:
+
+'{ "name": 'John', "age": 30 }'
+
+para o js abaixo também é objeto:
+
+{ "name": 'John', "age": 30 }
+
+O JSON js é uma strin original JSON

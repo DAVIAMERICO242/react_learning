@@ -1,0 +1,90 @@
+##########################Quando usar useContext react:
+
+1. Quando quero compartilhar um tema entre varios componentes (Ex. um estado que a classe do componente recebe e existe uma estilização sobre essa classe)
+
+2. Quando quero usar dados de login em varios componentes.
+
+3. Gerenciar componentes globalmente 
+
+4. Persistencia de configurações nas rotas, tema/login etc
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ele serve para compartilhar estados/objetos/etc entre componentes,
+a arquitetura para usar o useContext segue a seguinte:
+
+//Um arquivo só para declarar o contexto funcionalmente e exportar (createContext), geralmente não atribuimos estado aqui, só em value =.... no provider
+//Importação e declaração do contexto dentro do App principal (declarar com .provider)
+//A recepção do contexto usando useContext dentro dos componentes filho (filho do context provider)
+
+
+PS: em value=... PRECISO DECLARAR COMO OBJETO
+
+AS IMPORTAÇÕES SÃO COM RESPEITO AO HOOK E CONTEXTO
+
+
+###########Declarando e criando o contexto:
+
+//Aqui só declaramos o nome do contexto para usarmos seus filhos no provider (os filhos são aqueles que tem a possibilidade de compartilhar o estado) 
+
+import {createContext} from 'react';
+
+const UserContext = createContext({});
+
+export default UserContext;
+
+##########Aqui declaramos dentro de .provider os componentes candidatos a compartilhar o estado:
+
+//NOTE QUE O ESTADO É DECLARO NO COMPONENTE PRINCIPAL, E O VALOR E SEU ALTERADOR É INSERIDO NO PROVIDER
+
+import React, {useState ,useEffect, useRef, useContext} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App1 from './components/Componente1'
+import App2 from './components/Componente2'
+import UserContext from './components/ContextCounter.js'// IMPORTANDO O CONTEXTO (gerenciador abstrato)
+const MainComponent = () => {
+  const [state,setState] = useState('ESTADO X')
+
+  return(
+    <React.StrictMode>
+      <UserContext.Provider value = {{state,setState}}>// QUEM FOR FILHO DE UserContext.Provider poderá acessar o estado (é em value=.... que essa conexão é feita)
+        <App1/>
+        <App2/>
+      </UserContext.Provider>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);
+
+
+##########Recebendo o estado compartilhado
+
+useContext(UserContext), onde UserContext é o componente auxiliar para abrigar o contexto, terá atributos que serão desestruturados para conseguirmos gerenciar
+o estado compartilhado:
+
+import React, { useState, useEffect, useRef, useContext} from 'react';//IMPORTANDO O HOOK
+import UserContext from "./ContextCounter.js"//IMPORTANDO O CONTEXTO
+
+function App() {
+    const {state,setState} = useContext(UserContext)//RECEPÇÃO DO ESTADO COMPARTILHADO PELA DESESTRUTURAÇÃO DO CONTEXTO
+
+return(
+ <div> O estado atual do componente 1 é {state}</div>
+)
+}
+export default App;
+
+--------------------------------------------------
+
+import UserContext from './ContextCounter.js'
+import {useContext} from 'react' //IMPORTANDO O HOOK
+const App2 = () =>{
+    const {state, setState} = useContext(UserContext)//RECEPÇÃO DO ESTADO COMPARTILHADO
+    return (
+        <div>O estado atual do componente 2 é {state}</div>
+    )
+}
+
+export default App2

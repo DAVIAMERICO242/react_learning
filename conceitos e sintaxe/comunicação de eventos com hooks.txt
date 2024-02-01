@@ -1,0 +1,23 @@
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+import Componente2 from './components/Componente2.js'
+
+const MainComponent = () => {
+  const [current_name, modifier] = useState('davi')
+
+  return(
+    <React.StrictMode>
+      <Componente2 name = {current_name} idade = {23}/>
+      <input onChange = {(e) => modifier(e.target.value)}></input> //o valor de um evento oculto (o novo valor da string inputada apos ser mudada) muda o estado do usuario
+    </React.StrictMode>
+  );
+
+  };
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent />);
+
+
+##e.target é o elemento html onde o evento ocorreu

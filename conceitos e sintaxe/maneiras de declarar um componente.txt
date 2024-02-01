@@ -1,0 +1,8 @@
+function MyComponent() {
+  return <div>Hello, I'm a function component</div>;
+}
+
+
+const MyArrowComponent = () => {
+  return <div>Hello, I'm an arrow function component</div>;
+};

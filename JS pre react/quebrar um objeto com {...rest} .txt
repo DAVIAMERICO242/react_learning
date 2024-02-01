@@ -1,0 +1,9 @@
+z = {a:0, b:1, c:2}
+
+const {a,...rest} = z// a variavel "a" vai assumir o valor do atirbuto "a" em z e rest vai ser um novo objeto contendo o resto do objeto exceto "a"
+
+output:
+
+a = 0
+
+rest = {b:1,c:2}

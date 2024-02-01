@@ -1,0 +1,53 @@
+***Arquitetura básica:
+
+O index.html vai conectar o codigo em react.
+
+No codigo em react possuimos o codigo principal que vai usar os componentes.
+
+e possuimos os componentes que estarao em .js ou .jsx, tambem temos o codigo raizes
+que contem a maioria das importações
+
+***CSS:
+
+As fontes sao primeiramente chamadas no index html
+
+Podemos editar os elementos e componentes naturalmente pelo CSS, mas devemos importar
+podemos criar um CSS geral que editara um index.js (raiz)/ou App.js (codigo react principal) ou um CSS pra cada componente, mas sempre devemos importar o css para os componentes usados,também podemos usar o codigo principal.
+
+O CSS É GLOBAL, SO A FOLOSOFIA E LOCAL, mas mesmo assim posso referenciar os componentes
+com o nome dele pra mudança ser apenas local
+
+PS: É bom por a className como algo que referencia o estilo do componente
+
+A página que vamos mais mecher é o src.
+
+*****Componentes:
+
+os componentes devem ser exportados e importados para onde eles serão usados
+
+
+*****Conexão entre o codigo react principal e o index.html:
+
+em index.html teremos uma linha de codigo chamada
+
+
+<div id='root'>
+
+no app.js (codigo principal do react) temos:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+
+root.render vai joar o que ta entre parenteses dentro da div com id root no index.html

@@ -1,0 +1,1 @@
+é o que acontece primeiro quando um evento é disparado

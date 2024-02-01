@@ -1,0 +1,5 @@
+instalar node antes
+
+npx create-react-app nome_app
+
+npm start

@@ -1,0 +1,53 @@
+toda vez que a pagina é recarregada, o estado ou props de um componente muda então o componente é renderizado, isso implica que todo codigo java script no componente vai ser rodado de novo
+para a parte do codigo sincrona isso pode implicar que valores de determinadas variaveis serão resetados.
+
+#####Um componente muda seu visual se e somente si um efeito CSS é adicionado ou ele é renderizado.
+
+#####O return so acontece quando um componente é renderizado
+
+
+#####NÃO CONFUNDIR RE-RENDERIZAÇÃO COM EXECUÇÃO DE FUNÇÃO ASSINCRONA, A RENDERIZAÇÃO STATA O COMPONENTE FUNCIONA DO 0, A FUNÇÃO ASSINCRONA SO RODA A FUNÇÃO DNV DENTRO DO COMPONENTE
+
+#####A alteração de um texto no react dentro de uma div por exemplo geralmente é consequencia do componente rodar de novo, CSS é exceção
+
+
+****componente:
+
+
+import React, {useEffect,useState} from 'react';
+import axios from 'axios';
+
+const App = ({any_name}) => {
+  var x = 1;
+  console.log(x)
+  x = x + 1;
+  return(
+    <div className = {any_name}></div>
+  )
+};
+
+export default App;
+
+****componente principal:
+
+import React, {useState ,useEffect} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+
+
+const MainComponent = () => {
+  const [name, setName] = useState('name')
+
+  return(
+    <React.StrictMode>
+      <App any_name = {name}/>
+      <button onClick = {()=> {name === 'name'?setName('other name'):setName('name')}}> Button</button>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);
+
+///NOTE QUE QUANDO A PROP ANY_NAME MUDA O VALOR DE X VOLTA PRA 1 MESMO QUE A PAGINA NAO RECARREGUE

@@ -1,0 +1,3 @@
+Na deep copy eu posso alterar qualquer atributo em qualquer camada que eu nao altero o objeto inicial
+
+const deep_copy = JSON.parse(JSON.stringify(objeto))//quando usamos o JSON.parse o mesmo objeto é criado em uma aprte diferente da memoria o que permite uma copia deep

@@ -1,0 +1,73 @@
+****Componente com prop:
+
+
+function any_component(props){
+    return(
+        <div className = {props.name}>
+
+        </div>
+    )
+
+}
+
+export default any_component
+
+
+*****Chamada do componente no react principal:
+
+
+import './App.css'
+import any_component from './components/primeiro componente.js'
+
+function App() {
+  return (
+    <div className="App">
+          <any_component name = "Matheus"/>
+    </div>
+  );
+}
+
+export default App;
+
+
+*****Funcionamento:
+
+--As props so recebem strings, numbers ou JSX code
+
+
+o atributo "name" do componente em html vai ta ligado com o atributo name do objeto props
+
+Quando se passa name = "Matheus" é como se, dentro do codigo do componente, props fosse criado como um objeto abstrato com atributo name
+
+O OBJETO PROPS EM SI NAO É DECLARADO
+
+
+*****Funcionamento mais complexo com destruturação:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+import Componente2 from './components/Componente2.js'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <React.StrictMode>
+    <Componente2 name = "davi" idade = {23}/>//passando as propriedades do objeto para o objeto abstrato props
+  </React.StrictMode>
+);
+
+const componente_2 = ({name,idade})=>{ //no recebimento implicito de props destruturamos eles em seus atributos (os atributos do componente html1)
+    return(
+        <div>
+            Meu nome é {name} e tenho {idade} anos. //e usamos eles livremente como variaveis js
+        </div>
+    )
+}
+
+export default componente_2;
+
+****CSS:
+
+css nao comunica com props diretamente tenho que usar classe pra estilziar

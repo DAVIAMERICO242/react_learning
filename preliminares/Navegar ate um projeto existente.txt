@@ -1,0 +1,3 @@
+cd "diretorio"
+
+npm start

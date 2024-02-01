@@ -1,0 +1,3 @@
+***side bar:
+
+criar o estado inicialmente off, quando o botao é clicado uma função é disparada que muda o estado pra on, o estado atual vai ser a classe do container que abriga a side bar

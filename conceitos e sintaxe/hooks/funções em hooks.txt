@@ -1,0 +1,5 @@
+const [state, setState] = useState(0)
+
+setState((e)=> e + 1)// nao por {} depois de =>
+
+e vai ser um elemento abstrato que representa o estado atual

@@ -1,0 +1,10 @@
+import styles from './App.css'
+import any_name from './components/primeiro componente.js'
+
+function App() {
+  return (
+    <div className="styles.class1"> // onde class1 é a classe que foi estilizada dentro de App.css
+          <any_name name = "Matheus"/>
+    </div>
+  );
+}

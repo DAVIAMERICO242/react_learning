@@ -1,0 +1,55 @@
+###########Estrutura com um argumento
+
+useEffect(função) //a função é executada quando ocorre algum reload/alteração html (renderização) no componente a qual o useEffect esta inserido
+
+########O useEffect é aplicado um instante antes da renderização
+
+***Abaixo mudamos o estado de classe com um botao (assim ocorre uma alteração/renderização no html):
+
+
+import React, {useState ,useEffect} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+import axios from 'axios';
+
+
+const MainComponent = () => {
+  const [current_sate, setState] = useState(0)
+  return(
+    <React.StrictMode>
+      <App name = {current_sate}/>
+      <button onClick = {()=>{current_sate?setState(0):setState(1)}}> Any </button>
+    </React.StrictMode>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent/>);
+
+
+****usamos um useEffect para printar "html changed" com cada mudança no componente 
+
+
+import './App.module.css'
+import React, {useState ,useEffect} from 'react';
+function App(props) {
+  useEffect(()=>console.log('html changed'))
+  return (
+    <div className = {props.name}>
+
+    </div>
+
+  );
+}
+
+export default App;
+
+############Estrutura com dois argumentos
+
+useEffect(função, array_de_estados)//executa uma função quando o array de estados muda ou quando ocorre um reload inicial MAS NÃO quando o html do componente é atualizado
+
+esse array de estados é um array de variaveis js declaradas por useState
+
+useEffect(função, [])//executa uma função assim quando o elemento carrega, mas não quando re-renderiza
+

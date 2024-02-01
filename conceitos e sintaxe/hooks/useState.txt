@@ -1,0 +1,53 @@
+CADA VEZ QUE O ESTADO DO USESTATE MUDA ELE É RENDERIZADO NOVAMENTE
+
+***Sintaxe (supondo que esta dentro do escopo funcional do componente):
+
+const [current_state, modifier] = useState('')
+
+isso é logicamente equivalente a atribuir current_state = '' e criar uma função que altera o valor de initial_state através de
+modifier(novo_valor), também podemos alterar atributos especificos do estado com:
+
+modifier({atri:'new_value'})
+
+no caso o estado inicial é bom ser um objeto
+
+
+****Na prática:
+
+geralmente se é criada uma função auxiliar para engatilhar a mudança de estado usando o modifier, por exemplo:
+
+  const modifier_parent = ()=>{
+      current_name === 'davi'?modifier('debora'):modifier('davi')
+  };
+
+<Componente2 name = {current_name} idade = {23}/>
+<button onClick = {modifier_parent}> Change name </button>
+
+não consiguimos declarar a função modifier diretamente dentro do elemento, então se é criada uma função pai que ditará
+como a mudança do estado deve se comportar.
+
+Outro jeito mais logicamente complexo é:
+
+import React, {useState} from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './components/Componente1.js';
+import Componente2 from './components/Componente2.js'
+
+const MainComponent = () => {
+  const [current_name, modifier] = useState('davi')
+
+  return(
+    <React.StrictMode>
+      <Componente2 name = {current_name} idade = {23}/>
+      <button onClick = {() => {current_name === 'davi'?modifier('debora'):modifier('davi')}}> Change </button>
+    </React.StrictMode>
+  );
+
+  };
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<MainComponent />);
+
+PS: EU NAO POSSO USAR DUAS VEZES SEGUIDAS O MESMO HOOK NA HORA DE FOR ALTERAR O ESTADO PORQUE O CODIGO É ASSINCRONO
+

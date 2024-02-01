@@ -1,0 +1,3 @@
+fetch é pra requisitar dados de uma API, necessita de um then adicional para passar para json
+
+axios é um fetch mais moderno que ja passa pra JSON
